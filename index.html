@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajayi Collins Enesi - Administrative & Personal Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .dark .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+        
+        .dark .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 1);
+            border-color: rgba(59, 130, 246, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .dark .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        
+        .service-icon {
+            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .glass-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+        
+        .skill-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            background: linear-gradient(90deg, #3b82f6 0%, #10b981 100%);
+            height: 100%;
+            border-radius: 999px;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .grid-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        /* Mobile Menu Styles */
+        #mobile-menu {
+            transform: translateY(-100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        #mobile-menu.visible {
+            transform: translateY(0);
+        }
+        
+        .nav-link-mobile {
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link-mobile::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link-mobile:hover::before {
+            width: 100%;
+        }
+
+        @media (max-width: 1023px) {
+            #navbar {
+                background: transparent !important;
+                border-bottom: none !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                padding-top: env(safe-area-inset-top);
+            }
+
+            #mobile-menu {
+                top: 56px !important;
+            }
+
+            #navbar .max-w-7xl > .flex {
+                justify-content: flex-end;
+            }
+
+            #mobile-menu-button {
+                background: rgba(15, 23, 42, 0.94) !important;
+                border: 1px solid rgba(148, 163, 184, 0.5) !important;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45) !important;
+                color: #f8fafc !important;
+            }
+
+            #mobile-menu {
+                background: rgba(15, 23, 42, 0.95) !important;
+            }
+
+            #mobile-menu .nav-link-mobile {
+                color: #e2e8f0 !important;
+                background: rgba(15, 23, 42, 0.25);
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 border-b transition-all duration-300" id="navbar" style="background: linear-gradient(180deg, rgba(30, 41, 59, 0.75) 0%, rgba(20, 30, 48, 0.7) 100%); backdrop-filter: blur(25px); border-color: rgba(100, 150, 200, 0.25); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); padding-top: env(safe-area-inset-top);">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20 lg:h-24">
+                <div class="hidden lg:flex items-center space-x-2 sm:space-x-4">
+                    <div class="flex flex-col">
+                        <span class="text-xs sm:text-sm font-medium text-blue-300 uppercase tracking-widest">Ajayi Collins</span>
+                        <span class="text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight">Virtual Assistant</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="#home" class="nav-link text-base font-semibold text-gray-200 hover:text-blue-300 transition-colors px-3 py-1">Home</a>
+                    <a href="#services" class="nav-link text-base font-semibold text-gray-200 hover:text-blue-300 transition-colors px-3 py-1">Services</a>
+                    <a href="#about" class="nav-link text-base font-semibold text-gray-200 hover:text-blue-300 transition-colors px-3 py-1">About</a>
+                    <a href="#skills" class="nav-link text-base font-semibold text-gray-200 hover:text-blue-300 transition-colors px-3 py-1">Skills</a>
+                    <a href="#contact" class="px-7 py-3 rounded-full text-base font-bold text-white bg-gradient-to-r from-blue-600 to-green-500 hover:from-blue-700 hover:to-green-600 shadow-lg hover:shadow-2xl hover:scale-105 transition-all backdrop-blur-sm">
+                        Hire Me
+                    </a>
+                </div>
+
+                <!-- Mobile Navigation (logo + hamburger only) -->
+                <div class="lg:hidden flex items-center space-x-2">
+                    <!-- Hide the Hire Me button on small screens, use menu links instead -->
+                    <button id="mobile-menu-button" class="p-2 rounded-lg text-gray-200 hover:text-white hover:bg-white/10 transition-all" aria-label="Toggle mobile menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="lg:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm opacity-0 invisible transition-all duration-300" style="top: 64px;">
+            <div class="bg-slate-900/95 backdrop-blur-xl border-t border-white/10">
+                <div class="max-w-7xl mx-auto px-4 py-6">
+                    <div class="flex flex-col space-y-4">
+                        <a href="#home" class="nav-link-mobile text-lg font-semibold text-gray-200 hover:text-blue-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/5">Home</a>
+                        <a href="#services" class="nav-link-mobile text-lg font-semibold text-gray-200 hover:text-blue-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/5">Services</a>
+                        <a href="#about" class="nav-link-mobile text-lg font-semibold text-gray-200 hover:text-blue-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/5">About</a>
+                        <a href="#skills" class="nav-link-mobile text-lg font-semibold text-gray-200 hover:text-blue-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/5">Skills</a>
+                        <a href="#contact" class="nav-link-mobile text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-green-500 py-3 px-4 rounded-lg text-center hover:from-blue-700 hover:to-green-600 transition-colors">Hire Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-16 sm:pt-20 lg:pt-24">
+        <!-- Background Blobs -->
+        <div class="blob w-48 sm:w-64 md:w-80 lg:w-96 h-48 sm:h-64 md:h-80 lg:h-96 bg-blue-500 rounded-full top-10 sm:top-20 -left-10 sm:-left-20"></div>
+        <div class="blob w-40 sm:w-64 md:w-80 lg:w-80 h-40 sm:h-64 md:h-80 lg:h-80 bg-green-500 rounded-full bottom-10 sm:bottom-20 -right-10 sm:-right-20 animation-delay-2000"></div>
+        <div class="blob w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-blue-400 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-4000"></div>
+        
+        <div class="grid-pattern absolute inset-0 opacity-30"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 text-center w-full">
+            <div class="inline-flex items-center px-2 sm:px-4 py-2 rounded-full glass mb-4 sm:mb-6 lg:mb-8 reveal">
+                <span class="flex h-2 w-2 rounded-full bg-green-400 mr-2 animate-pulse"></span>
+                <span class="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">Available for new projects</span>
+            </div>
+            
+            <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 lg:mb-6 leading-tight reveal">
+                Ajayi Collins <br>
+                <span class="gradient-text">Your Virtual Administrative Assistant</span>
+            </h1>
+            
+            <p class="text-xs sm:text-base md:text-lg lg:text-3xl text-gray-900 max-w-2xl mx-auto mb-6 sm:mb-8 lg:mb-10 reveal leading-relaxed">
+                Streamlining your business operations with professional administrative support, personal assistance, and efficient management solutions. Over 4 years of experience in handling diverse tasks with precision and care.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 justify-center items-center reveal w-full px-2 sm:px-0">
+                <a href="#contact" class="btn-primary px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white flex items-center justify-center gap-2 group w-full sm:w-auto">
+                    Start Collaboration
+                    <i data-lucide="arrow-right" class="w-3 sm:w-4 lg:w-5 h-3 sm:h-4 lg:h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#services" class="px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-900 bg-gradient-to-r from-white/10 to-white/5 border-2 border-gray-300 hover:border-gray-400 hover:from-white/20 hover:to-white/10 transition-all duration-300 flex items-center justify-center gap-2 group backdrop-blur-sm hover:scale-105 hover:shadow-lg w-full sm:w-auto">
+                    View Services
+                    <i data-lucide="chevron-down" class="w-3 sm:w-4 lg:w-5 h-3 sm:h-4 lg:h-5 group-hover:translate-y-1 transition-transform"></i>
+                </a>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal">
+        </div>
+        
+        <div class="absolute bottom-8 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-5 sm:w-6 h-5 sm:h-6 text-white/50"></i>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16 reveal">
+                <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 gradient-text">Administrative Services</h2>
+                <p class="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-900 max-w-2xl mx-auto leading-relaxed px-4">Comprehensive administrative and personal assistance tailored to elevate your productivity.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Service Card 1 -->
+                <div class="glass-card p-6 sm:p-8 rounded-2xl sm:rounded-3xl reveal group cursor-pointer">
+                    <div class="service-icon w-12 sm:w-16 h-12 sm:h-16 rounded-lg sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6">
+                        <svg class="w-6 sm:w-8 h-6 sm:h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 group-hover:text-blue-600 transition-colors">Email Management</h3>
+                    <p class="text-sm sm:text-base text-gray-900 leading-relaxed">Inbox organization, priority filtering, professional responses, and spam management to keep your communications streamlined.</p>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="glass-card p-8 rounded-3xl reveal group cursor-pointer">
+                    <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-5H7v5h7v-5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-[#ff6b6b] transition-colors">Calendar & Scheduling</h3>
+                    <p class="text-gray-900 leading-relaxed">Appointment scheduling, meeting coordination, travel arrangements, and deadline management across time zones.</p>
+                </div>
+                
+                <!-- Service Card 3 -->
+                <div class="glass-card p-8 rounded-3xl reveal group cursor-pointer">
+                    <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-[#ff6b6b] transition-colors">Customer Support</h3>
+                    <p class="text-gray-900 leading-relaxed">Multi-channel support via email, chat, and phone. Ticket resolution, FAQ management, and client relationship maintenance.</p>
+                </div>
+                
+                <!-- Service Card 4 -->
+                <div class="glass-card p-8 rounded-3xl reveal group cursor-pointer">
+                    <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 10.02H5v3h5v3.01h3v-3.01h5v-3h-5V6.99h-3v3.03zM19 1h-8c-1.1 0-2 .9-2 2v4h3V2h8v20h-8v-4h-3v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-[#ff6b6b] transition-colors">Data Entry & Research</h3>
+                    <p class="text-gray-900 leading-relaxed">Accurate data processing, CRM updates, market research, competitor analysis, and comprehensive reporting.</p>
+                </div>
+                
+                <!-- Service Card 5 -->
+                <div class="glass-card p-8 rounded-3xl reveal group cursor-pointer">
+                    <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.06c.54.49 1.25.78 2.04.78 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.44 9.31 6.77 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.77 0 1.44-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-[#ff6b6b] transition-colors">Social Media Management</h3>
+                    <p class="text-gray-900 leading-relaxed">Content scheduling, community engagement, analytics tracking, and brand reputation monitoring across platforms.</p>
+                </div>
+                
+                <!-- Service Card 6 -->
+                <div class="glass-card p-8 rounded-3xl reveal group cursor-pointer">
+                    <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 13.5h8v-3H3v3zm0 8h8v-3H3v3zm0-14v3h8v-3H3zm10 8h8v-3h-8v3zm0 8h8v-3h-8v3zm0-14v3h8v-3h-8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-[#ff6b6b] transition-colors">Content Creation</h3>
+                    <p class="text-gray-900 leading-relaxed">Blog writing, newsletter creation, presentation design, and document formatting with attention to brand voice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative overflow-hidden">
+        <div class="blob w-72 h-72 bg-green-500 rounded-full -right-20 top-40 opacity-30"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+                <div class="relative reveal">
+                    <div class="relative rounded-3xl overflow-hidden aspect-[3/4] flex items-center justify-center bg-gray-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent z-10"></div>
+                        <img src="https://lh3.googleusercontent.com/pw/AP1GczOsqAP4P7GxJc_GH8mpb5hNPxUrUSYUMC11bH_c7xRv5S_AWKDjCiCuUGtPm4aezSnL3Ks-SO8r7W6kjXSzNPA6gHRsKkBiOsO8QjWCXUNxxMpF7g-9EJ8927xH3Bqp96x-3LjrcVUdAvw_CEOvutjD=w637-h955-s-no-gm?authuser=0" 
+                             alt="Ajayi Collins Enesi" 
+                             class="w-full h-full object-contain hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <h2 class="text-5xl md:text-6xl font-bold mb-8 gradient-text">Why Work With Me?</h2>
+                    <p class="text-gray-900 text-xl mb-10 leading-relaxed">
+                        With over 4 years of experience as an Administrative Assistant with Personal Assistant expertise, I specialize in streamlining business operations, managing schedules, handling communications, and providing comprehensive support to ensure efficiency and productivity. My skills include strong organizational abilities, excellent communication, time management, proficiency in Microsoft Office Suite, data entry, customer service, and proactive problem-solving.
+                    </p>
+                    
+                    <ul class="space-y-4 text-lg text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-600 text-2xl leading-tight flex-shrink-0">•</span>
+                            <div>
+                                <strong class="text-gray-900">Reliability First:</strong> Consistent availability with rapid response times and deadline commitment.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-600 text-2xl leading-tight flex-shrink-0">•</span>
+                            <div>
+                                <strong class="text-gray-900">Data Security:</strong> Strict confidentiality protocols and secure handling of sensitive information.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-600 text-2xl leading-tight flex-shrink-0">•</span>
+                            <div>
+                                <strong class="text-gray-900">Proactive Approach:</strong> Anticipating needs before they arise and suggesting process improvements.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16 reveal">
+                <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 gradient-text">Key Skills & Proficiencies</h2>
+                <p class="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-900 max-w-2xl mx-auto leading-relaxed px-4">Essential skills for administrative and personal assistance roles.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl mx-auto">
+                <div class="space-y-6 sm:space-y-8 reveal">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-lg">Microsoft Office Suite</span>
+                            <span class="text-[#ff6b6b] font-semibold">95%</span>
+                        </div>
+                        <div class="skill-bar h-3">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-lg">Google Workspace</span>
+                            <span class="text-[#ff6b6b] font-semibold">98%</span>
+                        </div>
+                        <div class="skill-bar h-3">
+                            <div class="skill-progress" data-width="98"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">CRM Software (Salesforce/HubSpot)</span>
+                            <span class="text-[#ff6b6b]">90%</span>
+                        </div>
+                        <div class="skill-bar h-3">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Project Management (Asana/Trello/Monday)</span>
+                            <span class="text-[#ff6b6b]">92%</span>
+                        </div>
+                        <div class="skill-bar h-3">
+                            <div class="skill-progress" data-width="92"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8 reveal">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Communication Tools (Slack/Zoom/Teams)</span>
+                            <span class="text-[#ff6b6b]">96%</span>
+                        </div>
+                        <div class="skill-bar h-3">
+                            <div class="skill-progress" data-width="96"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Social Media Platforms</span>
+                            <span class="text-[#ff6b6b]">88%</span>
+                        </div>
+                        <div class="skill-bar h-3">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">QuickBooks / Bookkeeping</span>
+                            <span class="text-[#ff6b6b]">85%</span>
+                        </div>
+                        <div class="skill-bar h-3">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Research & Data Analysis</span>
+                            <span class="text-[#ff6b6b]">94%</span>
+                        </div>
+                        <div class="skill-bar h-3">
+                            <div class="skill-progress" data-width="94"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tools Grid -->
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 sm:py-24 relative">
+        <div class="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-16 reveal">
+                <div class="text-center mb-8 sm:mb-12">
+                    <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 gradient-text">Let's Work Together</h2>
+                    <p class="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-900 max-w-2xl mx-auto leading-relaxed px-4">Ready to streamline your business? Send me a message and I'll respond within 24 hours.</p>
+                </div>
+                
+                <form class="space-y-6 sm:space-y-8" onsubmit="handleSubmit(event)">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                        <div class="relative">
+                            <label class="block text-lg font-semibold mb-3 text-gray-900">Name</label>
+                            <div class="relative">
+                                <input type="text" name="name" required class="w-full px-4 py-4 text-lg rounded-xl bg-white/80 border-2 border-gray-200 focus:border-blue-500 focus:outline-none transition-all text-gray-900 placeholder-gray-600" placeholder="Your full name">
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <label class="block text-lg font-semibold mb-3 text-gray-900">Email</label>
+                            <div class="relative">
+                                <input type="email" name="email" required class="w-full px-4 py-4 text-lg rounded-xl bg-white/80 border-2 border-gray-200 focus:border-blue-500 focus:outline-none transition-all text-gray-900 placeholder-gray-600" placeholder="your@email.com">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <label class="block text-lg font-semibold mb-3 text-gray-900">Service Interested In</label>
+                        <div class="relative">
+                            <select name="service" class="w-full px-4 py-4 text-lg rounded-xl bg-white/80 border-2 border-gray-200 focus:border-blue-500 focus:outline-none transition-all text-gray-900 appearance-none">
+                                <option>General Administrative Assistance</option>
+                                <option>Email & Calendar Management</option>
+                                <option>Customer Support</option>
+                                <option>Social Media Management</option>
+                                <option>Data Entry & Research</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <label class="block text-lg font-semibold mb-3 text-gray-900">Message</label>
+                        <div class="relative">
+                            <textarea name="message" rows="5" required class="w-full px-4 py-4 text-lg rounded-xl bg-white/80 border-2 border-gray-200 focus:border-blue-500 focus:outline-none transition-all text-gray-900 placeholder-gray-600 resize-none" placeholder="Tell me about your project and requirements..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full btn-primary py-5 rounded-xl text-xl font-bold text-white flex items-center justify-center gap-3 group hover:scale-105 transition-transform">
+                        Send Message
+                    </button>
+                </form>
+                
+                <div class="mt-12 sm:mt-16 pt-8 sm:pt-12 border-t-2 border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-center">
+                    <div class="flex flex-col items-center group">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:scale-110 transition-all">
+                            <a href="mailto:collinsajayi1601@gmail.com" class="text-white">
+                                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <a href="mailto:collinsajayi1601@gmail.com" class="text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors">collinsajayi1601@gmail.com</a>
+                    </div>
+                    <div class="flex flex-col items-center group">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:scale-110 transition-all">
+                            <a href="https://wa.me/23747040617202" class="text-white">
+                                <svg class="w-8 h-8" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M23.993 0C10.762 0 0 10.765 0 23.999C0 29.248 1.692 34.116 4.570 38.066L1.579 46.983L10.804 44.035C14.598 46.546 19.126 48 24.006 48C37.237 48 48 37.234 48 24.000C48 10.765 37.237 0.000 24.006 0.000L23.993 0.000L23.993 0 Z M17.292 12.190C16.827 11.076 16.474 11.034 15.769 11.005C15.529 10.991 15.262 10.977 14.966 10.977C14.048 10.977 13.089 11.245 12.511 11.838C11.806 12.557 10.056 14.236 10.056 17.679C10.056 21.122 12.567 24.451 12.905 24.917C13.258 25.382 17.800 32.550 24.853 35.471C30.368 37.757 32.004 37.545 33.260 37.277C35.093 36.882 37.393 35.527 37.971 33.891C38.549 32.254 38.549 30.857 38.380 30.560C38.211 30.264 37.745 30.095 37.040 29.742C36.335 29.389 32.907 27.696 32.258 27.470C31.623 27.231 31.017 27.315 30.537 27.993C29.860 28.938 29.198 29.898 28.661 30.476C28.238 30.928 27.547 30.984 26.969 30.744C26.193 30.420 24.021 29.657 21.340 27.273C19.267 25.425 17.856 23.125 17.448 22.434C17.038 21.729 17.405 21.319 17.729 20.938C18.082 20.501 18.421 20.191 18.773 19.781C19.126 19.372 19.323 19.160 19.549 18.681C19.789 18.215 19.620 17.735 19.450 17.382C19.281 17.030 17.871 13.587 17.292 12.190 Z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <a href="https://wa.me/23747040617202" class="text-lg font-semibold text-gray-900 hover:text-green-600 transition-colors">+237 470 406 172 02</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-8 sm:py-12">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 text-center md:text-left">
+            <div class="flex items-center space-x-2">
+                <span class="text-base sm:text-lg font-bold">Ajayi Collins Enesi</span>
+            </div>
+            
+            <div class="flex gap-4 sm:gap-6">
+                <a href="mailto:collinsajayi1601@gmail.com" class="text-gray-800 hover:text-blue-600 transition-colors" aria-label="Email Ajayi">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/23747040617202" class="text-gray-800 hover:text-green-600 transition-colors" aria-label="WhatsApp Ajayi">
+                    <svg class="w-6 h-6" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.993 0C10.762 0 0 10.765 0 23.999C0 29.248 1.692 34.116 4.570 38.066L1.579 46.983L10.804 44.035C14.598 46.546 19.126 48 24.006 48C37.237 48 48 37.234 48 24.000C48 10.765 37.237 0.000 24.006 0.000L23.993 0.000L23.993 0 Z M17.292 12.190C16.827 11.076 16.474 11.034 15.769 11.005C15.529 10.991 15.262 10.977 14.966 10.977C14.048 10.977 13.089 11.245 12.511 11.838C11.806 12.557 10.056 14.236 10.056 17.679C10.056 21.122 12.567 24.451 12.905 24.917C13.258 25.382 17.800 32.550 24.853 35.471C30.368 37.757 32.004 37.545 33.260 37.277C35.093 36.882 37.393 35.527 37.971 33.891C38.549 32.254 38.549 30.857 38.380 30.560C38.211 30.264 37.745 30.095 37.040 29.742C36.335 29.389 32.907 27.696 32.258 27.470C31.623 27.231 31.017 27.315 30.537 27.993C29.860 28.938 29.198 29.898 28.661 30.476C28.238 30.928 27.547 30.984 26.969 30.744C26.193 30.420 24.021 29.657 21.340 27.273C19.267 25.425 17.856 23.125 17.448 22.434C17.038 21.729 17.405 21.319 17.729 20.938C18.082 20.501 18.421 20.191 18.773 19.781C19.126 19.372 19.323 19.160 19.549 18.681C19.789 18.215 19.620 17.735 19.450 17.382C19.281 17.030 17.871 13.587 17.292 12.190 Z"/>
+                    </svg>
+                </a>
+            </div>
+            
+
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="glass-card p-8 rounded-3xl max-w-md w-full text-center transform scale-95 opacity-0 transition-all duration-300" id="modalContent">
+            <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="check" class="w-8 h-8 text-green-500"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">Message Sent!</h3>
+            <p class="text-gray-400 mb-6">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+            <button onclick="closeModal()" class="btn-primary px-6 py-2 rounded-full text-white font-medium">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function initIcons() {
+            if (window.lucide && typeof lucide.createIcons === 'function') {
+                lucide.createIcons();
+            } else {
+                document.querySelectorAll('[data-lucide]').forEach(icon => {
+                    icon.style.display = 'none';
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initIcons);
+        initIcons();
+        
+        // Mobile menu toggle functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+        
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('opacity-0', 'invisible');
+                mobileMenu.classList.add('opacity-100', 'visible');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            } else {
+                mobileMenu.classList.remove('opacity-100', 'visible');
+                mobileMenu.classList.add('opacity-0', 'invisible');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+            
+            // Update hamburger icon
+            const hamburgerIcon = mobileMenuButton.querySelector('svg');
+            if (isMenuOpen) {
+                hamburgerIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            } else {
+                hamburgerIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            }
+        }
+        
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link-mobile').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileMenu();
+            });
+        });
+        
+        // Close menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                toggleMobileMenu();
+            }
+        });
+        
+        // Form submission - send directly to Formspree
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            
+            // Disable button during submission
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending...';
+            
+            // Submit to Formspree
+            fetch('https://formspree.io/f/mqeyvjaj', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    showSuccessModal();
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to send message. Please try again or email collinsajayi1601@gmail.com');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            });
+        }
+        
+        function showSuccessModal() {
+            const modal = document.getElementById('successModal');
+            const content = document.getElementById('modalContent');
+            if (modal && content) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    content.classList.remove('scale-95', 'opacity-0');
+                    content.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const content = document.getElementById('modalContent');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+        
+        // GSAP Animations
+        try {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Reveal animations
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach((element, index) => {
+                gsap.to(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.4,
+                    ease: "power2.out",
+                    delay: index % 3 * 0.05
+                });
+            });
+            
+            // Counter animation
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                gsap.to(counter, {
+                    scrollTrigger: {
+                        trigger: counter,
+                        start: "top 85%"
+                    },
+                    innerHTML: target,
+                    duration: 0.8,
+                    snap: { innerHTML: 1 },
+                    ease: "power2.out"
+                });
+            });
+            
+            // Skill bars animation - simultaneous loading
+            const skillBars = document.querySelectorAll('.skill-progress');
+            const skillsSection = document.getElementById('skills');
+            
+            gsap.set(skillBars, { width: 0 }); // Start all bars at 0 width
+            
+            gsap.to(skillBars, {
+                scrollTrigger: {
+                    trigger: skillsSection,
+                    start: "top 80%",
+                    once: true // Only animate once
+                },
+                width: (i, target) => target.getAttribute('data-width') + "%",
+                duration: 0.8,
+                ease: "power2.out",
+                stagger: 0 // No stagger - all animate simultaneously
+            });
+        } catch (error) {
+            console.log('GSAP animation error:', error);
+            // Fallback: make all reveal elements visible
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }
+        
+        // Navbar remains dark throughout (no scroll effect needed)
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    if (mobileMenu && isMenuOpen) {
+                        toggleMobileMenu();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
